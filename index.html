@@ -17,7 +17,7 @@
         }
 
         .navbar-brand, .navbar-nav .nav-link {
-            color: #BBC7CE;
+            color: #ffffff;
         }
 
         .container {
@@ -38,18 +38,6 @@
             margin-bottom: 15px;
         }
 
-        .news-meta {
-            font-size: 14px;
-            color: #6c757d;
-            margin-bottom: 10px;
-        }
-
-        .news-date {
-            font-size: 14px;
-            color: #6c757d;
-            margin-bottom: 10px;
-        }
-
         .news-content {
             margin-bottom: 15px;
         }
@@ -59,13 +47,6 @@
             height: auto;
             border-radius: 10px;
             margin-bottom: 15px;
-        }
-
-        .related-news {
-            font-size: 18px;
-            font-weight: bold;
-            color: #28a745;
-            margin-bottom: 10px;
         }
 
         .read-more-btn {
@@ -87,6 +68,16 @@
             font-weight: bold;
             color: #343a40;
         }
+
+        .categories-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .categories-nav .nav-link {
+            margin: 0 10px;
+        }
     </style>
 </head>
 <body>
@@ -98,18 +89,51 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto categories-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" data-category="India" href="#">India</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Politics</a>
+                    <a class="nav-link" data-category="Business" href="#">Business</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Technology</a>
+                    <a class="nav-link" data-category="Politics" href="#">Politics</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Science</a>
+                    <a class="nav-link" data-category="Sports" href="#">Sports</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-category="Technology" href="#">Technology</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-category="Startups" href="#">Startups</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-category="Entertainment" href="#">Entertainment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-category="International" href="#">International</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-category="Automobile" href="#">Automobile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-category="Science" href="#">Science</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-category="Travel" href="#">Travel</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-category="Miscellaneous" href="#">Miscellaneous</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-category="Fashion" href="#">Fashion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-category="Education" href="#">Education</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-category="Health & Fitness" href="#">Health & Fitness</a>
                 </li>
             </ul>
         </div>
@@ -119,33 +143,42 @@
 <div class="container">
     <div id="news" class="category">
         <h2 class="category-title">Latest News</h2>
-        <ul id="newsList" class="list-group"></ul>
+        <div id="newsList" class="list-group"></div>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        fetchNews('latest', 'newsList');
+        const categories = ["India", "Business", "Politics", "Sports", "Technology", "Startups", "Entertainment", "International", "Automobile", "Science", "Travel", "Miscellaneous", "Fashion", "Education", "Health & Fitness"];
+
+        categories.forEach(category => {
+            const navLink = document.querySelector(`[data-category="${category}"]`);
+            navLink.addEventListener('click', () => {
+                fetchNews(category);
+            });
+        });
 
         setInterval(() => {
-            fetchNews('latest', 'newsList');
+            categories.forEach(category => {
+                fetchNews(category);
+            });
         }, 3600000);
 
-        async function fetchNews(category, elementId) {
+        async function fetchNews(category) {
             try {
-                const response = await fetch(`https://lexica.qewertyy.dev/news?category=${category}`);
+                const response = await fetch(`https://api.qewertyy.dev/news/${category}?page=`);
                 const data = await response.json();
 
                 if (data.code === 2) {
-                    const newsList = document.getElementById(elementId);
+                    const newsList = document.getElementById('newsList');
                     const articles = data.content;
 
                     newsList.innerHTML = '';
 
                     articles.forEach((article, index) => {
-                        const li = document.createElement('li');
-                        li.classList.add('list-group-item', 'news-item');
+                        const li = document.createElement('div');
+                        li.classList.add('news-item', 'mb-4', 'p-4', 'border', 'rounded');
                         li.innerHTML = `
                             <h5 class="news-title">${index + 1}. ${article.title}</h5>
                             <img src="${article.imageUrl}" class="news-image" alt="News Image">
