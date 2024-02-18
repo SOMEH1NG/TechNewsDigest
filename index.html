@@ -44,7 +44,20 @@
             margin-bottom: 10px;
         }
 
+        .news-date {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+
         .news-content {
+            margin-bottom: 15px;
+        }
+
+        .news-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
             margin-bottom: 15px;
         }
 
@@ -78,8 +91,19 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <!-- Add more categories as needed -->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Politics</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Technology</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Science</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -87,6 +111,7 @@
 
 <div class="container">
     <div id="news" class="category">
+        <h2 class="category-title">Latest News</h2>
         <ul id="newsList" class="list-group"></ul>
     </div>
 </div>
@@ -116,7 +141,8 @@
                         li.classList.add('list-group-item', 'news-item');
                         li.innerHTML = `
                             <h5 class="news-title">${index + 1}. ${article.title}</h5>
-                            <p class="news-meta">${new Date(article.publishedAt).toLocaleString()}</p>
+                            <img src="${article.imageUrl}" class="news-image" alt="News Image">
+                            <p class="news-meta">Published on: ${new Date(article.publishedAt).toLocaleDateString()}</p>
                             <p class="news-content">${article.content}</p>
                             <button class="read-more-btn" onclick="window.open('${article.url}', '_blank')">Read More</button>
                         `;
