@@ -6,13 +6,48 @@
     <title>Tech News Digest</title>
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Add your custom styles here */
+        .news-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .news-title {
+            font-size: 1.2rem;
+        }
+
+        .news-image {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .news-content {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .read-more-btn {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Tech News Digest</a>
-        
         <!-- Navbar Toggler Button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -28,8 +63,7 @@
 
     <!-- Content Area -->
     <div class="container mt-4">
-        <h2>Tech News Digest - India</h2>
-        <div id="newsContainer">
+        <div id="newsList">
             <!-- News articles will be dynamically added here -->
         </div>
     </div>
@@ -39,8 +73,63 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-    <!-- Your custom JavaScript for fetching and displaying news -->
-    <script src="your-script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const categories = ["India", "Business", "Politics", "Sports", "Technology", "Startups", "Entertainment", "International", "Automobile", "Science", "Travel", "Miscellaneous", "Fashion", "Education", "Health & Fitness", "Anime"];
+
+            const navList = document.querySelector('.navbar-nav');
+            const newsList = document.getElementById('newsList');
+
+            categories.forEach(category => {
+                const navItem = document.createElement('li');
+                navItem.classList.add('nav-item');
+                navItem.innerHTML = `<a class="nav-link" href="#" id="${category.toLowerCase()}">${category}</a>`;
+                navList.appendChild(navItem);
+
+                navItem.addEventListener('click', () => {
+                    fetchNews(category);
+                    // Close the navbar after clicking on a category
+                    document.querySelector('.navbar-toggler').click();
+                });
+            });
+
+            // Fetch news for all categories initially
+            fetchNews('All Categories');
+
+            setInterval(() => {
+                // Periodic fetch for all categories
+                fetchNews('All Categories');
+            }, 3600000);
+
+            async function fetchNews(category) {
+                try {
+                    const response = await fetch(`https://api.qewertyy.dev/news/${category.toLowerCase()}`);
+                    const data = await response.json();
+
+                    if (data.code === 2) {
+                        const articles = data.content;
+                        newsList.innerHTML = '';
+
+                        articles.forEach((article, index) => {
+                            const newsItem = document.createElement('div');
+                            newsItem.classList.add('news-item');
+                            newsItem.innerHTML = `
+                                <h5 class="news-title">${index + 1}. ${article.title}</h5>
+                                <img src="${article.imageUrl}" class="news-image" alt="${article.title}">
+                                <p class="news-content">${article.description}</p>
+                                <button class="read-more-btn" onclick="window.open('${article.url}', '_blank')">Read More</button>
+                            `;
+                            newsList.appendChild(newsItem);
+                        });
+                    } else {
+                        console.error(`Failed to fetch ${category} news:`, data.message);
+                    }
+                } catch (error) {
+                    console.error(`Error fetching ${category} news:`, error);
+                }
+            }
+        });
+    </script>
 
 </body>
 </html>
