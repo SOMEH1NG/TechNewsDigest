@@ -4,26 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech News Hub</title>
+    <title>Tech News Digest</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-HJ7ZVAYFBORyvlRkSYWPFQ5DO2crjQXs1u8Fv8DmT2RWvq46jj3zY5iqK7mI9t1N" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
     <style>
         body {
             background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .navbar {
-            background-color: #f8f9fa;
+            background-color: #343a40;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .navbar-brand {
-            color: #343a40;
+            color: #fff;
             font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .navbar-toggler-icon {
+            background-color: #fff;
         }
 
         .navbar-nav .nav-link {
-            color: #343a40;
+            color: #fff;
+            font-weight: bold;
         }
 
         .news-list {
@@ -33,42 +40,43 @@
         .news-item {
             background-color: #fff;
             margin-bottom: 20px;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease-in-out;
         }
 
         .news-item:hover {
-            transform: scale(1.05);
+            transform: scale(1.02);
         }
 
         .news-title {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: #007bff;
             margin-bottom: 10px;
         }
 
         .news-image {
             width: 100%;
-            max-height: 200px;
+            max-height: 300px;
             object-fit: cover;
-            border-radius: 5px;
-            margin-bottom: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
         }
 
         .news-content {
-            font-size: 1rem;
-            line-height: 1.5;
+            font-size: 1.2rem;
+            line-height: 1.6;
             color: #495057;
+            margin-bottom: 15px;
         }
 
         .read-more-btn {
-            padding: 8px 15px;
+            padding: 10px 20px;
             background-color: #007bff;
             color: #fff;
             border: none;
-            border-radius: 3px;
+            border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease-in-out;
         }
@@ -78,10 +86,14 @@
         }
 
         .footer {
-            background-color: #343a40;
-            color: #fff;
-            padding: 10px;
+            background-color: #f8f9fa;
+            color: #343a40;
+            padding: 20px 0;
             text-align: center;
+        }
+
+        .footer p {
+            margin: 0;
         }
     </style>
 </head>
@@ -89,8 +101,8 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="#">Tech News Hub</a>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Tech News Digestl</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -159,7 +171,7 @@
 
     <!-- Footer Section -->
     <div class="footer">
-        <p>&copy; 2024 Tech News Hub. All rights reserved.</p>
+        <p>&copy; 2024 Tech News Digest. All rights reserved.</p>
     </div>
 
 </body>
