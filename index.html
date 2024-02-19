@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <!-- Add the Telegram logo and other social media logos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-HJ7ZVAYFBORyvlRkSYWPFQ5DO2crjQXs1u8Fv8DmT2RWvq46jj3zY5iqK7mI9t1N" crossorigin="anonymous">
+
+    <!-- Add a link to Bootstrap Light Theme CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+
+    <!-- Existing meta tags remain unchanged -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Existing title remains unchanged -->
     <title>Tech News Digest</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         body {
             background-color: #f8f9fa;
@@ -74,8 +83,15 @@
         .read-more-btn:hover {
             background-color: #0056b3;
         }
+
+        .footer {
+            background-color: #f8f9fa;
+            padding: 10px;
+            text-align: center;
+        }
     </style>
 </head>
+
 <body>
 
     <!-- Navbar -->
@@ -90,8 +106,12 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Technology</a>
+                    <a class="nav-link" href="#">About</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://telegram.dog/TechNewsDigest"><i class="fab fa-telegram"></i> Telegram</a>
+                </li>
+                <!-- Add links to other social media platforms here -->
             </ul>
         </div>
     </nav>
@@ -121,7 +141,6 @@
                     if (data.code === 2) {
                         const articles = data.content;
                         const newsList = document.getElementById('newsList');
-                        newsList.innerHTML = '';
 
                         articles.forEach((article, index) => {
                             const newsItem = createNewsItem(article, index + 1);
@@ -146,8 +165,22 @@
                 `;
                 return newsItem;
             }
+
+            // Add script for dynamically loading more news on scroll
+            window.addEventListener('scroll', function () {
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                    // Load more news when the user scrolls to the bottom
+                    fetchNews('Technology'); // Adjust the category as needed
+                }
+            });
         });
     </script>
 
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>&copy; 2024 Tech News Digest. All rights reserved.</p>
+    </div>
+
 </body>
+
 </html>
