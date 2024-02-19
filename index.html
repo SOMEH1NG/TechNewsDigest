@@ -7,46 +7,79 @@
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Add your custom styles here */
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .navbar {
+            background-color: #343a40;
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .news-list {
+            margin-top: 20px;
+        }
+
         .news-item {
+            background-color: #fff;
             margin-bottom: 20px;
             padding: 15px;
-            border: 1px solid #ddd;
             border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .news-item:hover {
+            transform: scale(1.05);
         }
 
         .news-title {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+            color: #007bff;
+            margin-bottom: 10px;
         }
 
         .news-image {
             width: 100%;
             max-height: 200px;
             object-fit: cover;
-            margin-top: 10px;
-            margin-bottom: 10px;
             border-radius: 5px;
+            margin-bottom: 10px;
         }
 
         .news-content {
             font-size: 1rem;
             line-height: 1.5;
+            color: #495057;
         }
 
         .read-more-btn {
-            padding: 5px 10px;
+            padding: 8px 15px;
             background-color: #007bff;
             color: #fff;
             border: none;
             border-radius: 3px;
             cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .read-more-btn:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="#">Tech News Digest</a>
         <!-- Navbar Toggler Button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,16 +88,18 @@
 
         <!-- Navbar Links -->
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <!-- Categories will be dynamically added here -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Technology</a>
+                </li>
             </ul>
         </div>
     </nav>
 
     <!-- Content Area -->
     <div class="container mt-4">
-        <div id="newsList">
-            <!-- News articles will be dynamically added here -->
+        <div class="news-list" id="newsList">
+            <!-- Technology news will be dynamically added here -->
         </div>
     </div>
 
@@ -75,28 +110,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const categories = ["India", "Business", "Politics", "Sports", "Technology", "Startups", "Entertainment", "International", "Automobile", "Science", "Travel", "Miscellaneous", "Fashion", "Education", "Health & Fitness", "Anime"];
-
-            const navList = document.querySelector('.navbar-nav');
-            const newsList = document.getElementById('newsList');
-
-            // Populate the navbar with categories
-            populateNavbar(categories);
-
-            function populateNavbar(categories) {
-                categories.forEach(category => {
-                    const navItem = document.createElement('li');
-                    navItem.classList.add('nav-item');
-                    navItem.innerHTML = `<a class="nav-link" href="#" id="${category.toLowerCase()}">${category}</a>`;
-                    navList.appendChild(navItem);
-
-                    navItem.addEventListener('click', () => {
-                        fetchNews(category);
-                        // Close the navbar after clicking on a category
-                        document.querySelector('.navbar-toggler').click();
-                    });
-                });
-            }
+            // Fetch and display Technology news initially
+            fetchNews('Technology');
 
             async function fetchNews(category) {
                 try {
@@ -105,6 +120,7 @@
 
                     if (data.code === 2) {
                         const articles = data.content;
+                        const newsList = document.getElementById('newsList');
                         newsList.innerHTML = '';
 
                         articles.forEach((article, index) => {
