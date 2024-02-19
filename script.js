@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const categories = ["India", "Business", "Politics", "Sports", "Technology", "Startups", "Entertainment", "International", "Automobile", "Science", "Travel", "Miscellaneous", "Fashion", "Education", "Health & Fitness", "Anime"];
 
-    const navList = document.querySelector('.nav-list');
+    const navList = document.querySelector('.navbar-nav');
     const newsList = document.getElementById('newsList');
 
     categories.forEach(category => {
@@ -53,4 +53,3 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 });
-      
