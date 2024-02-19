@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const categories = ["India", "Business", "Politics", "Sports", "Technology", "Startups", "Entertainment", "International", "Automobile", "Science", "Travel", "Miscellaneous", "Fashion", "Education", "Health & Fitness", "Anime", "Mixed"];
+    const categories = ["India","Business","Politics","Sports","Technology","Startups","Entertainment","International","Automobile","Science","Travel","Miscellaneous","Fashion","Education","Health & Fitness","Anime","Mixed"];
 
     const navList = document.querySelector('.navbar-nav');
     const newsList = document.getElementById('newsList');
