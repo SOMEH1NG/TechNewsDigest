@@ -1,100 +1,66 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const categories = ["India","Business","Politics","Sports","Technology","Startups","Entertainment","International","Automobile","Science","Travel","Miscellaneous","Fashion","Education","Health & Fitness","Anime","Mixed"];
+document.addEventListener("DOMContentLoaded", function () {
+    // Fetch news data from the API
+    fetch("https://api.qewertyy.dev/news/categories")
+        .then(response => response.json())
+        .then(data => {
+            // Display default category news (India)
+            displayNews(data['India']);
 
-    const navList = document.querySelector('.navbar-nav');
-    const newsList = document.getElementById('newsList');
-
-    categories.forEach(category => {
-        const navItem = document.createElement('li');
-        navItem.classList.add('nav-item');
-        navItem.innerHTML = `<a class="nav-link" href="#" id="${category.toLowerCase()}">${category}</a>`;
-        navList.appendChild(navItem);
-
-        navItem.addEventListener('click', () => {
-            fetchNews(category.toLowerCase());
-            // Close the navbar after clicking on a category
-            document.querySelector('.navbar-toggler').click();
-        });
-    });
-
-    // Fetch news for all categories initially
-    fetchMixedNews();
-
-    setInterval(() => {
-        // Periodic fetch for all categories
-        fetchMixedNews();
-    }, 3600000);
-
-    async function fetchNews(category) {
-        try {
-            let apiUrl;
-            if (category === 'mixed') {
-                fetchMixedNews();
-                return;
-            } else {
-                apiUrl = `https://api.qewertyy.dev/news/${category.replace(/ /g, '-')}`;
-            }
-
-            const response = await fetch(apiUrl);
-            const data = await response.json();
-
-            if (data.code === 2) {
-                const articles = data.content;
-                newsList.innerHTML = '';
-
-                articles.forEach((article, index) => {
-                    const newsItem = document.createElement('div');
-                    newsItem.classList.add('news-item');
-                    newsItem.innerHTML = `
-                        <h5 class="news-title">${index + 1}. ${article.title}</h5>
-                        <img src="${article.imageUrl}" class="news-image" alt="News Image">
-                        <p class="news-content">${article.content}</p>
-                        <button class="read-more-btn" onclick="window.open('${article.url}', '_blank')">Read More</button>
-                    `;
-                    newsList.appendChild(newsItem);
-                });
-            } else {
-                console.error(`Failed to fetch ${category} news:`, data.message);
-            }
-        } catch (error) {
-            console.error(`Error fetching ${category} news:`, error);
-        }
-    }
-
-    async function fetchMixedNews() {
-        try {
-            const apiUrl = 'https://api.qewertyy.dev/news/all';
-            const response = await fetch(apiUrl);
-            const data = await response.json();
-
-            if (data.code === 2) {
-                const articles = data.content;
-                newsList.innerHTML = '';
-
-                // Show 1 or 2 random news articles
-                const randomArticles = getRandomElements(articles, Math.min(2, articles.length));
-
-                randomArticles.forEach((article, index) => {
-                    const newsItem = document.createElement('div');
-                    newsItem.classList.add('news-item');
-                    newsItem.innerHTML = `
-                        <h5 class="news-title">${index + 1}. ${article.title}</h5>
-                        <img src="${article.imageUrl}" class="news-image" alt="News Image">
-                        <p class="news-content">${article.content}</p>
-                        <button class="read-more-btn" onclick="window.open('${article.url}', '_blank')">Read More</button>
-                    `;
-                    newsList.appendChild(newsItem);
-                });
-            } else {
-                console.error('Failed to fetch mixed news:', data.message);
-            }
-        } catch (error) {
-            console.error('Error fetching mixed news:', error);
-        }
-    }
-
-    function getRandomElements(array, numElements) {
-        const shuffledArray = array.slice().sort(() => 0.5 - Math.random());
-        return shuffledArray.slice(0, numElements);
-    }
+            // Populate categories in the navbar
+            populateCategories(Object.keys(data));
+            
+            // Add event listener for category selection in the navbar
+            document.getElementById('navbarNav').addEventListener('click', function (event) {
+                if (event.target.classList.contains('nav-link')) {
+                    const selectedCategory = event.target.dataset.category;
+                    displayNews(data[selectedCategory]);
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
 });
+
+function populateCategories(categories) {
+    const navbarList = document.querySelector('.navbar-nav');
+
+    // Add a list item for each category in the navbar
+    categories.forEach(category => {
+        const listItem = document.createElement('li');
+        listItem.classList.add('nav-item');
+
+        const link = document.createElement('a');
+        link.classList.add('nav-link');
+        link.setAttribute('href', '#');
+        link.setAttribute('data-category', category);
+        link.textContent = category;
+
+        listItem.appendChild(link);
+        navbarList.appendChild(listItem);
+    });
+}
+
+function displayNews(news) {
+    // Clear previous news
+    document.getElementById('newsContainer').innerHTML = '';
+
+    // Display each news article
+    news.forEach(article => {
+        const newsElement = document.createElement('div');
+        newsElement.classList.add('card', 'mb-3');
+        newsElement.innerHTML = `
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="${article.image}" class="card-img" alt="${article.title}">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">${article.title}</h5>
+                        <p class="card-text">${article.description}</p>
+                        <a href="${article.url}" class="btn btn-primary" target="_blank">Read More</a>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.getElementById('newsContainer').appendChild(newsElement);
+    });
+}
