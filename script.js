@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const categories = ["India", "Business", "Politics", "Sports", "Technology", "Startups", "Entertainment", "International", "Automobile", "Science", "Travel", "Miscellaneous", "Fashion", "Education", "Health & Fitness", "Anime"];
+    const categories = ["India", "Business", "Politics", "Sports", "Technology", "Startups", "Entertainment", "International", "Automobile", "Science", "Travel", "Miscellaneous", "Fashion", "Education", "Health & Fitness", "Anime", "Mixed"];
 
     const navList = document.querySelector('.navbar-nav');
     const newsList = document.getElementById('newsList');
@@ -18,16 +18,23 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Fetch news for all categories initially
-    fetchNews('All Categories');
+    fetchNews('Mixed');
 
     setInterval(() => {
         // Periodic fetch for all categories
-        fetchNews('All Categories');
+        fetchNews('Mixed');
     }, 3600000);
 
     async function fetchNews(category) {
         try {
-            const response = await fetch(`https://api.qewertyy.dev/news/${category.toLowerCase()}`);
+            let apiUrl;
+            if (category.toLowerCase() === 'mixed') {
+                apiUrl = 'https://api.qewertyy.dev/news/all';
+            } else {
+                apiUrl = `https://api.qewertyy.dev/news/${category.toLowerCase().replace(/ /g, '-')}`;
+            }
+
+            const response = await fetch(apiUrl);
             const data = await response.json();
 
             if (data.code === 2) {
