@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     categories.forEach(category => {
         const navItem = document.createElement('li');
         navItem.classList.add('nav-item');
-        navItem.innerHTML = `<a class="nav-link" data-category="${category}" href="#">${category}</a>`;
+        navItem.innerHTML = `<a class="nav-link" href="#" id="${category.toLowerCase()}">${category}</a>`;
         navList.appendChild(navItem);
 
         navItem.addEventListener('click', () => {
@@ -17,19 +17,17 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    categories.forEach(category => {
-        fetchNews(category);
-    });
+    // Fetch news for all categories initially
+    fetchNews('All Categories');
 
     setInterval(() => {
-        categories.forEach(category => {
-            fetchNews(category);
-        });
+        // Periodic fetch for all categories
+        fetchNews('All Categories');
     }, 3600000);
 
     async function fetchNews(category) {
         try {
-            const response = await fetch(`https://api.qewertyy.dev/news/${category}`);
+            const response = await fetch(`https://api.qewertyy.dev/news/${category.toLowerCase()}`);
             const data = await response.json();
 
             if (data.code === 2) {
