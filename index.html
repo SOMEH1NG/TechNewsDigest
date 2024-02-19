@@ -2,43 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="styles.css">
-    <title>News App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech News Digest</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">News App</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#" id="all">All</a>
-            </li>
-            
-        </ul>
-    </div>
-</nav>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Tech News Digest</a>
+        
+        <!-- Navbar Toggler Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-<div class="container">
-    <div id="newsList" class="mt-4">
-        <!-- News articles will be dynamically added here -->
-    </div>
-</div>
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <!-- Categories will be dynamically added here -->
+            </ul>
+        </div>
+    </nav>
 
-<script src="https://code.jquery.com/jquery-3.6.4.slim.min.js"
-        integrity="sha384-oGN9RB8aKajl+KtA0veALHeA6giv1bBYjnxprG2b0p8cvh+3UC5PbDH1RFsqzca"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-        integrity="sha384-4s+ctR7QqORqAysJlVb6B5aUc5q1xmqMzqKaFss5+7Xq3n2D2/D8JKsVvlMDT0Xw"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
-        integrity="sha384-E3sZ5Lm36W/gZZIjrZiS3nLpp3ctCpRzF1ikTxsXkfaOe/9sm4cWp9EW5u1sOzZl"
-        crossorigin="anonymous"></script>
-<script src="script.js"></script>
+    <!-- Content Area -->
+    <div class="container mt-4">
+        <h2>Tech News Digest - India</h2>
+        <div id="newsContainer">
+            <!-- News articles will be dynamically added here -->
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Your custom JavaScript for fetching and displaying news -->
+    <script src="your-script.js"></script>
+
 </body>
 </html>
