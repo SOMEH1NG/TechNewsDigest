@@ -2,19 +2,11 @@
 <html lang="en">
 
 <head>
-    <!-- Add the Telegram logo and other social media logos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-HJ7ZVAYFBORyvlRkSYWPFQ5DO2crjQXs1u8Fv8DmT2RWvq46jj3zY5iqK7mI9t1N" crossorigin="anonymous">
-
-    <!-- Add a link to Bootstrap Light Theme CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
-
-    <!-- Existing meta tags remain unchanged -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Existing title remains unchanged -->
     <title>Tech News Digest</title>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-HJ7ZVAYFBORyvlRkSYWPFQ5DO2crjQXs1u8Fv8DmT2RWvq46jj3zY5iqK7mI9t1N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
     <style>
         body {
             background-color: #f8f9fa;
@@ -94,43 +86,34 @@
 
 <body>
 
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="#">Tech News Digest</a>
-        <!-- Navbar Toggler Button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
-        <!-- Navbar Links -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://telegram.dog/TechNewsDigest"><i class="fab fa-telegram"></i> Telegram</a>
+                    <a class="nav-link" href="https://telegram.dog/TechNewsDigest" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
                 </li>
-                <!-- Add links to other social media platforms here -->
             </ul>
         </div>
     </nav>
 
-    <!-- Content Area -->
     <div class="container mt-4">
         <div class="news-list" id="newsList">
             <!-- Technology news will be dynamically added here -->
         </div>
     </div>
 
-    <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Fetch and display Technology news initially
             fetchNews('Technology');
 
             async function fetchNews(category) {
@@ -143,8 +126,10 @@
                         const newsList = document.getElementById('newsList');
 
                         articles.forEach((article, index) => {
-                            const newsItem = createNewsItem(article, index + 1);
-                            newsList.appendChild(newsItem);
+                            if (!document.getElementById(`news-${article.id}`)) {
+                                const newsItem = createNewsItem(article, index + 1);
+                                newsList.appendChild(newsItem);
+                            }
                         });
                     } else {
                         console.error(`Failed to fetch ${category} news:`, data.message);
@@ -157,6 +142,7 @@
             function createNewsItem(article, index) {
                 const newsItem = document.createElement('div');
                 newsItem.classList.add('news-item');
+                newsItem.id = `news-${article.id}`;
                 newsItem.innerHTML = `
                     <h5 class="news-title">${index}. ${article.title}</h5>
                     <img src="${article.imageUrl}" class="news-image" alt="${article.title}">
@@ -166,17 +152,20 @@
                 return newsItem;
             }
 
-            // Add script for dynamically loading more news on scroll
             window.addEventListener('scroll', function () {
                 if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-                    // Load more news when the user scrolls to the bottom
-                    fetchNews('Technology'); // Adjust the category as needed
+                    fetchNews('Technology');
                 }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(function (element) {
+                element.addEventListener('click', function () {
+                    document.querySelector('.navbar-collapse').classList.remove('show');
+                });
             });
         });
     </script>
 
-    <!-- Footer Section -->
     <div class="footer">
         <p>&copy; 2024 Tech News Digest. All rights reserved.</p>
     </div>
