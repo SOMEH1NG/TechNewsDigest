@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         navItem.addEventListener('click', () => {
             fetchNews(category);
+            // Close the navbar after clicking on a category
+            document.querySelector('.navbar-toggler').click();
         });
     });
 
