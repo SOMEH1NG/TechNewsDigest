@@ -80,26 +80,26 @@
             const navList = document.querySelector('.navbar-nav');
             const newsList = document.getElementById('newsList');
 
-            categories.forEach(category => {
-                const navItem = document.createElement('li');
-                navItem.classList.add('nav-item');
-                navItem.innerHTML = `<a class="nav-link" href="#" id="${category.toLowerCase()}">${category}</a>`;
-                navList.appendChild(navItem);
-
-                navItem.addEventListener('click', () => {
-                    fetchNews(category);
-                    // Close the navbar after clicking on a category
-                    document.querySelector('.navbar-toggler').click();
-                });
-            });
-
-            // Fetch news for all categories initially
+            // Initialize the page with 'All Categories'
             fetchNews('All Categories');
 
-            setInterval(() => {
-                // Periodic fetch for all categories
-                fetchNews('All Categories');
-            }, 3600000);
+            // Populate the navbar with categories
+            populateNavbar(categories);
+
+            function populateNavbar(categories) {
+                categories.forEach(category => {
+                    const navItem = document.createElement('li');
+                    navItem.classList.add('nav-item');
+                    navItem.innerHTML = `<a class="nav-link" href="#" id="${category.toLowerCase()}">${category}</a>`;
+                    navList.appendChild(navItem);
+
+                    navItem.addEventListener('click', () => {
+                        fetchNews(category);
+                        // Close the navbar after clicking on a category
+                        document.querySelector('.navbar-toggler').click();
+                    });
+                });
+            }
 
             async function fetchNews(category) {
                 try {
@@ -111,14 +111,7 @@
                         newsList.innerHTML = '';
 
                         articles.forEach((article, index) => {
-                            const newsItem = document.createElement('div');
-                            newsItem.classList.add('news-item');
-                            newsItem.innerHTML = `
-                                <h5 class="news-title">${index + 1}. ${article.title}</h5>
-                                <img src="${article.imageUrl}" class="news-image" alt="${article.title}">
-                                <p class="news-content">${article.description}</p>
-                                <button class="read-more-btn" onclick="window.open('${article.url}', '_blank')">Read More</button>
-                            `;
+                            const newsItem = createNewsItem(article, index + 1);
                             newsList.appendChild(newsItem);
                         });
                     } else {
@@ -127,6 +120,18 @@
                 } catch (error) {
                     console.error(`Error fetching ${category} news:`, error);
                 }
+            }
+
+            function createNewsItem(article, index) {
+                const newsItem = document.createElement('div');
+                newsItem.classList.add('news-item');
+                newsItem.innerHTML = `
+                    <h5 class="news-title">${index}. ${article.title}</h5>
+                    <img src="${article.imageUrl}" class="news-image" alt="${article.title}">
+                    <p class="news-content">${article.description}</p>
+                    <button class="read-more-btn" onclick="window.open('${article.url}', '_blank')">Read More</button>
+                `;
+                return newsItem;
             }
         });
     </script>
