@@ -12,15 +12,8 @@ body {
     font-size: 1.5rem;
 }
 
-.categories-nav {
+.navbar-nav {
     margin-left: auto;
-}
-
-.nav-list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    align-items: center;
 }
 
 .nav-item {
