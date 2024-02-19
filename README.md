@@ -1,1 +1,1 @@
-# dailynews.github.io
+##### Tech News Digest
