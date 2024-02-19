@@ -1,75 +1,46 @@
 body {
     background-color: #f8f9fa;
-    color: #495057;
-    font-family: 'Arial', sans-serif;
 }
 
 .navbar {
-    background-color: #343a40;
+    margin-bottom: 20px;
 }
 
-.navbar-brand {
-    font-size: 1.5rem;
-}
-
-.navbar-nav {
-    margin-left: auto;
-}
-
-.nav-item {
-    margin-right: 10px;
-}
-
-.category-title {
-    margin-top: 30px;
-    font-size: 32px;
-    font-weight: bold;
-    color: #343a40;
-}
-
-.news-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
+.container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .news-item {
-    border: 1px solid #dee2e6;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.3s ease-in-out;
-}
-
-.news-item:hover {
-    transform: scale(1.05);
+    margin-bottom: 20px;
 }
 
 .news-title {
-    color: #007bff;
     font-size: 1.2rem;
     margin-bottom: 10px;
 }
 
 .news-image {
-    width: 100%;
+    max-width: 100%;
     height: auto;
-    border-radius: 10px 10px 0 0;
+    margin-bottom: 10px;
 }
 
 .news-content {
-    margin: 10px;
+    color: #555555;
 }
 
 .read-more-btn {
-    background-color: #dc3545;
+    background-color: #007bff;
     color: #ffffff;
     border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
+    padding: 8px 16px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
 }
 
 .read-more-btn:hover {
-    background-color: #c82333;
+    background-color: #0056b3;
 }
