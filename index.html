@@ -7,91 +7,7 @@
     <title>Tech News Digest</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-HJ7ZVAYFBORyvlRkSYWPFQ5DO2crjQXs1u8Fv8DmT2RWvq46jj3zY5iqK7mI9t1N" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .navbar {
-            background-color: #007bff; /* Light blue for the navbar */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar-brand {
-            color: #17a2b8; 
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-
-        .navbar-toggler-icon {
-            background-color: #17a2b8; 
-        }
-
-        .navbar-nav .nav-link {
-            color: #17a2b8;
-            font-weight: bold;
-        }
-
-        .news-item {
-            background-color: #fff; 
-            margin-bottom: 20px;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .news-item:hover {
-            transform: scale(1.02);
-        }
-
-        .news-title {
-            font-size: 1.8rem;
-            color: #007bff;
-            margin-bottom: 10px;
-        }
-
-        .news-image {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-
-        .news-content {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            color: #495057; 
-            margin-bottom: 15px;
-        }
-
-        .read-more-btn {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease-in-out;
-        }
-
-        .read-more-btn:hover {
-            background-color: #0056b3;
-        }
-
-        .footer {            
-            background-color: #007bff; 
-            color: #fff; 
-            padding: 20px 0;
-            text-align: center;
-        }
-
-        .footer p {
-            margin: 0;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -104,7 +20,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="https://telegram.dog/TechNewsDigest" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
@@ -119,11 +38,18 @@
         </div>
     </div>
 
+    <div class="container mt-4" id="about">
+        <div class="about-section">
+            <h2>About Tech News Digest</h2>
+            <p>Welcome to Tech News Digest, your go-to source for the latest in technology. We strive to keep you informed about the most exciting developments in the tech world. Explore our curated news articles and stay updated with the rapidly evolving tech landscape.</p>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
- 
+
     <div class="footer">
         <p>&copy; 2024 Tech News Digest. All rights reserved.</p>
     </div>
